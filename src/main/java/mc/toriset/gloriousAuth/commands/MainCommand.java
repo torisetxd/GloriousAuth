@@ -11,6 +11,11 @@ import org.jetbrains.annotations.NotNull;
 public class MainCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
+        if (!commandSender.hasPermission("gauth.admin")) {
+            commandSender.sendMessage(GloriousAuth.prefix.append(AdventureUtils.fromLegacy("&cSorry you don't have permissions for that.")));
+            return true;
+        }
+
         if (commandSender instanceof Player player) {
             if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
                 commandSender.sendMessage(GloriousAuth.fullprefix);
