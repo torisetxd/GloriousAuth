@@ -1,0 +1,17 @@
+# Gradle
+.gradle/
+build/
+
+# IntelliJ IDEA
+.idea/
+
+# Gradle Wrapper
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# System Files (Optional, but recommended)
+.DS_Store
+Thumbs.db
+
+# Logs (Optional)
+*.log

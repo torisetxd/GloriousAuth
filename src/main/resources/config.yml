@@ -1,0 +1,17 @@
+security:
+  # Possible Options: SHA512, PBKDF2, BCRYPT, ARGON2
+  # Case Sensitive.
+  algorithm: BCRYPT
+
+environment:
+  # Possible Potions: SIMPLE, SPAWN, WORLD
+  # Case Sensitive.
+  # Simple is the player stays where they logged out because you can see where they are (Not safe)
+  # Spawn teleports to a specific place when logging in, teleports back when logged in.
+  # World is a separate world where the player gets teleported and is free to move around but cant do anything and then get teleported back once logged in.
+  type: SIMPLE
+
+# Do not edit
+do_not_edit:
+  # null if undefined.
+  spawn_location: null

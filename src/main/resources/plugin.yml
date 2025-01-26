@@ -1,0 +1,13 @@
+name: GloriousAuth
+version: '1.0-SNAPSHOT'
+main: mc.toriset.gloriousAuth.GloriousAuth
+api-version: '1.21'
+commands:
+  login:
+    description: Login to your account.
+  register:
+    description: Setup an account password.
+  gloriousauth:
+    aliases:
+      - gauth
+    description: Main command for managing Glorious Auth.
