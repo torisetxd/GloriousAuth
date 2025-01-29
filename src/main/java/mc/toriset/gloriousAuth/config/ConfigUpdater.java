@@ -37,7 +37,7 @@ public class ConfigUpdater {
                     String password = user.getConfig().raw().getString("password");
                     HashAlgorithm algorithm = HashAlgorithm.valueOf(algorithmString);
 
-                    user.getConfig().setAlgorithmPassword(algorithm, password);
+                    user.getConfig().setAlgorithmRawField(algorithm, "password", password);
                 }
             }
 

@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class UserConfig {
@@ -45,13 +46,18 @@ public class UserConfig {
 
     public boolean verifyPassword(String rawPassword) {
         String authData = config.getString("password");
+        System.out.println("authData: " + authData);
         if (authData == null) return false;
 
         String[] parts = authData.split(DELIMITER);
+        System.out.println("parts: " + Arrays.toString(parts));
         if (parts.length != 2) return false;
 
+
         HashAlgorithm algorithm = HashAlgorithm.valueOf(parts[0]);
+        System.out.println("algo: " + algorithm);
         String hashedPassword = parts[1];
+        System.out.println("hashedPassword: " + hashedPassword);
         return SecurityUtils.comparePassword(algorithm, rawPassword, hashedPassword);
     }
 
@@ -65,7 +71,11 @@ public class UserConfig {
 
     public void setAlgorithmSecuredField(HashAlgorithm algorithm, String key, String value) {
         String hashedValue = SecurityUtils.securePassword(algorithm, value);
-        String securedData = algorithm.name() + DELIMITER + hashedValue;
+        setAlgorithmRawField(algorithm, key, hashedValue);
+    }
+
+    public void setAlgorithmRawField(HashAlgorithm algorithm, String key, String value) {
+        String securedData = algorithm.name() + DELIMITER + value;
         config.set(key, securedData);
         save();
     }
