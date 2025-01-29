@@ -76,7 +76,11 @@ public class AuthListener implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent playerQuitEvent) {
-        getAuthUser(playerQuitEvent.getPlayer()).saveLogoutLocation();
-        GloriousAuth.getInstance().getAuthManager().freeUser(playerQuitEvent.getPlayer());
+        Player player = playerQuitEvent.getPlayer();
+        AuthUser user = getAuthUser(player);
+        if (user.isLoggedIn()) {
+            getAuthUser(player).saveLogoutLocation();
+        }
+        GloriousAuth.getInstance().getAuthManager().freeUser(player);
     }
 }
