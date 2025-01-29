@@ -1,6 +1,7 @@
 package mc.toriset.gloriousAuth;
 
 import mc.toriset.gloriousAuth.auth.AuthManager;
+import mc.toriset.gloriousAuth.auth.AuthUser;
 import mc.toriset.gloriousAuth.commands.MainCommand;
 import mc.toriset.gloriousAuth.commands.LoginCommand;
 import mc.toriset.gloriousAuth.commands.RegisterCommand;
@@ -45,11 +46,32 @@ public final class GloriousAuth extends JavaPlugin {
 
         Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () -> {
             for (Player player : Bukkit.getOnlinePlayers()) {
-                if (authManager.getUser(player).getState() == LoginState.LOGGING_IN) {
-                    player.sendMessage(AdventureUtils.fromLegacy("&6Please login using &7/login <password>&6."));
+                AuthUser authUser = authManager.getUser(player);
+                if (authUser.getState() == LoginState.LOGGING_IN) {
+                    Component title = AdventureUtils.gradient("Authentication Required", "ff6b6b", "ffd93d");
+                    Component subtitle;
+
+                    if (authUser.getConfig().hasPassword()) {
+                        subtitle = AdventureUtils.hex("ffd93d", "/login <password>");
+                    } else {
+                        subtitle = AdventureUtils.hex("ffd93d", "/register <password> <password>");
+                    }
+
+                    Component actionBar = AdventureUtils.gradient("Please authenticate to continue playing", "#4ecdc4", "#45b7af");
+                    player.showTitle(net.kyori.adventure.title.Title.title(
+                            title,
+                            subtitle,
+                            net.kyori.adventure.title.Title.Times.times(
+                                    java.time.Duration.ofMillis(0),
+                                    java.time.Duration.ofMillis(1250),
+                                    java.time.Duration.ofMillis(250)
+                            )
+                    ));
+
+                    player.sendActionBar(actionBar);
                 }
             }
-        }, 0L, 100L);
+        }, 0L, 20L);
     }
 
     @Override

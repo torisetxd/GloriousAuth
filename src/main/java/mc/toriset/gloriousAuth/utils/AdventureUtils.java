@@ -77,18 +77,18 @@ public class AdventureUtils {
         if (colors.length < 2) {
             throw new IllegalArgumentException("At least 2 colors are required for a gradient!");
         }
-        
+
         StringBuilder miniMessageFormat = new StringBuilder("<gradient:");
         for (int i = 0; i < colors.length; i++) {
-            miniMessageFormat.append(colors[i].replace("#", ""));
+            miniMessageFormat.append("#");
+            miniMessageFormat.append( colors[i].replace("#", ""));
             if (i < colors.length - 1) {
                 miniMessageFormat.append(":");
             }
         }
         miniMessageFormat.append(">").append(text).append("</gradient>");
-        
-        return miniMessage.deserialize(miniMessageFormat.toString())
-                .decoration(TextDecoration.ITALIC, false);
+
+        return parse(miniMessageFormat.toString());
     }
     
     /**

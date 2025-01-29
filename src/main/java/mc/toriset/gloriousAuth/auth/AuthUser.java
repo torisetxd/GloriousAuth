@@ -4,6 +4,7 @@ import mc.toriset.gloriousAuth.GloriousAuth;
 import mc.toriset.gloriousAuth.config.UserConfig;
 import mc.toriset.gloriousAuth.environment.EnvironmentUtil;
 import mc.toriset.gloriousAuth.utils.*;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -57,7 +58,20 @@ public class AuthUser {
 
     public void logIn() {
         setState(LoginState.LOGGED_IN);
-        getPlayer().sendMessage(AdventureUtils.fromLegacy("&aYou've successfully logged in."));
+        Component title = AdventureUtils.gradient("Success!", "ff6b6b", "ffd93d");
+        Component subtitle = AdventureUtils.gradient("Successfully logged in!", "5df362", "30e836");
+
+        getPlayer().showTitle(net.kyori.adventure.title.Title.title(
+                title,
+                subtitle,
+                net.kyori.adventure.title.Title.Times.times(
+                        java.time.Duration.ofMillis(250),
+                        java.time.Duration.ofMillis(1250),
+                        java.time.Duration.ofMillis(250)
+                )
+        ));
+        getPlayer().sendActionBar("");
+
         cleanupLoginEnvironment();
     }
 
