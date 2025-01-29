@@ -13,7 +13,7 @@ import java.security.spec.InvalidKeySpecException;
 
 public class SecurityUtils {
 
-    public static String securePassword(PasswordAlgorithm algo, String password) {
+    public static String securePassword(HashAlgorithm algo, String password) {
         switch (algo) {
             case SHA512 -> {
                 try {
@@ -59,10 +59,10 @@ public class SecurityUtils {
         }
     }
 
-    public static boolean comparePassword(PasswordAlgorithm algo, String rawPassword, String hashedPassword) {
+    public static boolean comparePassword(HashAlgorithm algo, String rawPassword, String hashedPassword) {
         switch (algo) {
             case SHA512 -> {
-                String newHash = securePassword(PasswordAlgorithm.SHA512, rawPassword);
+                String newHash = securePassword(HashAlgorithm.SHA512, rawPassword);
                 return hashedPassword.equals(newHash);
             }
             case PBKDF2 -> {

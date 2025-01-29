@@ -2,7 +2,7 @@ package mc.toriset.gloriousAuth.listener;
 
 import mc.toriset.gloriousAuth.GloriousAuth;
 import mc.toriset.gloriousAuth.auth.AuthUser;
-import mc.toriset.gloriousAuth.utils.EnvironmentType;
+import mc.toriset.gloriousAuth.environment.EnvironmentType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

@@ -1,4 +1,4 @@
-package mc.toriset.gloriousAuth.utils;
+package mc.toriset.gloriousAuth.environment;
 
 public enum EnvironmentType {
     SIMPLE,

@@ -1,5 +1,5 @@
 name: GloriousAuth
-version: '1.0-SNAPSHOT'
+version: ${version}
 main: mc.toriset.gloriousAuth.GloriousAuth
 api-version: '1.21'
 commands:

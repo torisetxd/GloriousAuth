@@ -13,5 +13,7 @@ environment:
 
 # Do not edit
 do_not_edit:
+  # config version - do not edit, this is for backward compatibility
+  version: ${version}
   # null if undefined.
   spawn_location: null

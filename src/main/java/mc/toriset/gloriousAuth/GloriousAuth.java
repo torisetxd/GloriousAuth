@@ -4,6 +4,8 @@ import mc.toriset.gloriousAuth.auth.AuthManager;
 import mc.toriset.gloriousAuth.commands.MainCommand;
 import mc.toriset.gloriousAuth.commands.LoginCommand;
 import mc.toriset.gloriousAuth.commands.RegisterCommand;
+import mc.toriset.gloriousAuth.config.ConfigUpdater;
+import mc.toriset.gloriousAuth.environment.EnvironmentType;
 import mc.toriset.gloriousAuth.listener.AuthListener;
 import mc.toriset.gloriousAuth.utils.*;
 import net.kyori.adventure.text.Component;
@@ -11,8 +13,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.awt.*;
 
 public final class GloriousAuth extends JavaPlugin {
     static GloriousAuth instance;
@@ -33,6 +33,8 @@ public final class GloriousAuth extends JavaPlugin {
         this.getCommand("gloriousauth").setExecutor(new MainCommand());
 
         this.getServer().getPluginManager().registerEvents(new AuthListener(), this);
+
+        ConfigUpdater.updateConfigs();
 
         loadSpawnLocation();
 
@@ -64,8 +66,8 @@ public final class GloriousAuth extends JavaPlugin {
         saveConfig();
     }
 
-    public PasswordAlgorithm getAlgorithm() {
-        return PasswordAlgorithm.valueOf(getConfig().getString("security.algorithm"));
+    public HashAlgorithm getAlgorithm() {
+        return HashAlgorithm.valueOf(getConfig().getString("security.algorithm"));
     }
 
     public EnvironmentType getEnvType() {
