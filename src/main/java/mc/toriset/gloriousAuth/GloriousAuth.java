@@ -7,6 +7,8 @@ import mc.toriset.gloriousAuth.commands.LoginCommand;
 import mc.toriset.gloriousAuth.commands.RegisterCommand;
 import mc.toriset.gloriousAuth.config.ConfigUpdater;
 import mc.toriset.gloriousAuth.environment.EnvironmentType;
+import mc.toriset.gloriousAuth.filter.ConsoleFilter;
+import mc.toriset.gloriousAuth.filter.FilterHelper;
 import mc.toriset.gloriousAuth.listener.AuthListener;
 import mc.toriset.gloriousAuth.utils.*;
 import net.kyori.adventure.text.Component;
@@ -35,9 +37,10 @@ public final class GloriousAuth extends JavaPlugin {
 
         this.getServer().getPluginManager().registerEvents(new AuthListener(), this);
 
-        ConfigUpdater.updateConfigs();
 
-        loadSpawnLocation();
+        ConfigUpdater.updateConfigs(); // auto update config
+        FilterHelper.init(); // hide login/register commands from console
+        loadSpawnLocation();  // load the spawn location
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             // no need to rejoin if reloading plugin, although still not intended
